@@ -1,0 +1,641 @@
+/* ── Section ───────────────────────────────────────────────────────────── */
+
+.work {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  padding: clamp(88px, 11vw, 150px) var(--gutter) clamp(96px, 11vw, 150px);
+  background:
+    radial-gradient(ellipse 50% 35% at 12% 38%, rgba(140, 109, 79, 0.22) 0%, transparent 70%),
+    linear-gradient(180deg, var(--mocha-dark) 0%, var(--deep) 45%, #221810 100%);
+}
+
+/* Faint blueprint grid that fades out toward the edges. */
+.work__grid-bg {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background-image:
+    linear-gradient(rgba(244, 217, 160, 0.045) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(244, 217, 160, 0.045) 1px, transparent 1px);
+  background-size: 64px 64px;
+  -webkit-mask-image: radial-gradient(ellipse 80% 60% at 50% 30%, #000 20%, transparent 75%);
+  mask-image: radial-gradient(ellipse 80% 60% at 50% 30%, #000 20%, transparent 75%);
+}
+
+.work__glow {
+  position: absolute;
+  z-index: -1;
+  right: -18%;
+  top: -12%;
+  width: 62%;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  pointer-events: none;
+  background: radial-gradient(circle, rgba(232, 170, 95, 0.18) 0%, rgba(200, 121, 44, 0.07) 45%, transparent 70%);
+  animation: glow 9s ease-in-out infinite;
+}
+
+/* ── Header ────────────────────────────────────────────────────────────── */
+
+.work__head {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(18px, 2.5vw, 30px);
+  margin-bottom: clamp(64px, 9vw, 120px);
+}
+
+.work__meta {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px 24px;
+  font-size: 12px;
+}
+
+.work__areas {
+  color: rgba(244, 217, 160, 0.8);
+}
+
+.work__title {
+  margin: 0;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  column-gap: 0.2em;
+  font-family: var(--display);
+  font-size: clamp(64px, 12vw, 210px);
+  font-weight: 400;
+  line-height: 0.86;
+  text-transform: uppercase;
+}
+
+/* Gradient lives on each split char so it isn't painted at the final position
+   while the letters are still rising; the :not(:has()) rule covers the
+   unsplit text shown when reduced motion skips the split. */
+.work__title-fill .split-char,
+.work__title-fill:not(:has(.split-char)) {
+  background: linear-gradient(180deg, #fff0d2 0%, var(--champagne) 40%, #e2ac68 75%, var(--amber) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.work__title-fill {
+  filter: drop-shadow(0 0 32px rgba(244, 190, 110, 0.28));
+}
+
+.work__title-outline {
+  color: transparent;
+  -webkit-text-stroke: 1.5px var(--champagne);
+}
+
+.work .scroll-reveal.work__intro {
+  max-width: 60ch;
+  margin: 0;
+}
+
+.work .scroll-reveal-text.work__intro-text {
+  font-size: clamp(15px, 1.45vw, 19px);
+  font-weight: 400;
+  line-height: 1.65;
+}
+
+/* ── Group labels ──────────────────────────────────────────────────────── */
+
+.work__group {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 0 0 clamp(24px, 3vw, 36px);
+  font-size: 12px;
+  font-weight: 400;
+}
+
+.work__group::after {
+  content: '';
+  order: 1;
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(90deg, rgba(244, 217, 160, 0.3), transparent);
+}
+
+.work__count {
+  order: 2;
+  color: rgba(244, 217, 160, 0.6);
+}
+
+/* ── Project cards ─────────────────────────────────────────────────────── */
+
+.work__grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(20px, 2.4vw, 32px);
+  margin-bottom: clamp(96px, 12vw, 168px);
+}
+
+.project.spotlight-card {
+  display: flex;
+  flex-direction: column;
+  gap: 26px;
+  min-width: 0;
+  padding: clamp(14px, 1.6vw, 20px) clamp(14px, 1.6vw, 20px) clamp(24px, 2.6vw, 32px);
+  border-radius: 4px;
+}
+
+.project.project--featured {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: minmax(0, 1.45fr) minmax(0, 1fr);
+  align-items: center;
+  gap: clamp(24px, 4vw, 64px);
+  padding-bottom: clamp(14px, 1.6vw, 20px);
+}
+
+.project.project--reverse {
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.45fr);
+}
+
+.project--reverse .frame {
+  order: 2;
+}
+
+.project--featured .project__info {
+  padding: 8px clamp(4px, 1vw, 16px);
+}
+
+.frame {
+  display: block;
+  color: inherit;
+}
+
+.work-window.window {
+  overflow: hidden;
+  background: rgba(30, 22, 15, 0.6);
+  -webkit-backdrop-filter: none;
+  backdrop-filter: none;
+  box-shadow: 0 24px 48px -24px rgba(10, 6, 3, 0.7);
+  transition: border-color 0.5s ease;
+}
+
+a.frame:hover .work-window {
+  border-color: rgba(244, 217, 160, 0.55);
+}
+
+/* ── Screenshot / screen ───────────────────────────────────────────────── */
+
+.shot {
+  position: relative;
+  aspect-ratio: 16 / 10;
+  overflow: hidden;
+  background: var(--deep);
+}
+
+/* Screenshots sit in a warm, slightly sepia wash so bright client sites blend
+   into the palette; hovering lifts the wash and shows the real colours. */
+.shot img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top;
+  filter: sepia(0.35) saturate(0.85) brightness(0.9);
+  transition:
+    transform 1.4s var(--ease-out),
+    filter 0.8s ease;
+}
+
+.shot::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(180deg, transparent 45%, rgba(42, 31, 22, 0.55) 100%);
+  transition: opacity 0.8s ease;
+}
+
+a.frame:hover .shot img {
+  transform: scale(1.045);
+  filter: none;
+}
+
+a.frame:hover .shot::after {
+  opacity: 0;
+}
+
+.shot__overlay {
+  position: absolute;
+  left: 14px;
+  bottom: 14px;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 12px;
+  font-size: 11px;
+  background: rgba(30, 22, 15, 0.85);
+  border: 1px solid rgba(244, 217, 160, 0.25);
+  -webkit-backdrop-filter: blur(6px);
+  backdrop-filter: blur(6px);
+}
+
+.shot__pulse {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--amber);
+  animation: pulse 1.6s ease-out infinite;
+}
+
+.screen {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 8px;
+  height: 100%;
+  padding: clamp(20px, 6%, 44px);
+  font-size: clamp(12px, 1.05vw, 14px);
+  line-height: 1.6;
+  background:
+    radial-gradient(ellipse 80% 70% at 88% 0%, rgba(232, 170, 95, 0.2) 0%, transparent 70%),
+    linear-gradient(160deg, #3f3022 0%, var(--deep) 100%);
+}
+
+.screen__progress {
+  position: relative;
+  height: 2px;
+  margin-top: 18px;
+  overflow: hidden;
+  background: rgba(244, 217, 160, 0.14);
+}
+
+.screen__progress::after {
+  content: '';
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 38%;
+  background: linear-gradient(90deg, transparent, var(--amber), var(--amber-soft));
+  animation: indeterminate 1.8s var(--ease-out) infinite;
+}
+
+.screen--name {
+  align-items: center;
+  font-family: var(--display);
+  font-size: clamp(40px, 6vw, 80px);
+  text-transform: uppercase;
+  color: transparent;
+  -webkit-text-stroke: 1px var(--champagne);
+}
+
+/* ── Card copy ─────────────────────────────────────────────────────────── */
+
+.project__info {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 16px;
+  min-width: 0;
+}
+
+.project__top {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px 14px;
+  width: 100%;
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.project__kind {
+  color: rgba(244, 217, 160, 0.85);
+}
+
+.project__kind .is-scrambled {
+  color: var(--amber);
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-left: auto;
+  padding: 5px 10px;
+  border: 1px solid rgba(244, 217, 160, 0.25);
+  border-radius: 999px;
+  font-size: 10px;
+}
+
+.badge__dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+}
+
+.badge--live .badge__dot {
+  background: var(--amber);
+  animation: pulse 2s ease-out infinite;
+}
+
+.badge--wip {
+  border-style: dashed;
+}
+
+.badge--wip .badge__dot {
+  border: 1px solid var(--champagne);
+  animation: blink 1.2s steps(1) infinite;
+}
+
+.badge--private .badge__dot {
+  background: var(--mocha-light);
+}
+
+.project__name {
+  margin: 0;
+  font-family: var(--display);
+  font-size: clamp(40px, 4.4vw, 64px);
+  font-weight: 400;
+  line-height: 0.9;
+  text-transform: uppercase;
+}
+
+.project--featured .project__name {
+  font-size: clamp(52px, 6.4vw, 104px);
+  background: linear-gradient(180deg, #fff0d2 0%, var(--champagne) 45%, #e2ac68 85%, var(--amber) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.project__subtitle {
+  display: block;
+  margin-top: 10px;
+  font-family: var(--mono);
+  font-size: 13px;
+  line-height: 1.2;
+  text-transform: none;
+  color: var(--amber-soft);
+  -webkit-text-fill-color: var(--amber-soft);
+}
+
+.project__desc {
+  margin: 0;
+  max-width: 58ch;
+  font-size: 13px;
+  line-height: 1.75;
+  color: rgba(244, 217, 160, 0.85);
+}
+
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.tags li {
+  padding: 5px 10px;
+  font-size: 11px;
+  border: 1px solid rgba(244, 217, 160, 0.18);
+  background: rgba(244, 217, 160, 0.04);
+  transition:
+    border-color 0.3s ease,
+    background 0.3s ease;
+}
+
+.project:hover .tags li {
+  border-color: rgba(244, 217, 160, 0.32);
+}
+
+.project__link {
+  position: relative;
+  display: inline-flex;
+  gap: 8px;
+  padding-bottom: 4px;
+  font-size: 13px;
+}
+
+.project__link::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 1px;
+  background: currentColor;
+  transform: scaleX(0.35);
+  transform-origin: left;
+  transition: transform 0.4s var(--ease-out);
+}
+
+.project__link:hover::after {
+  transform: scaleX(1);
+}
+
+/* ── Shopify shelf ─────────────────────────────────────────────────────── */
+
+.shelf__body {
+  display: grid;
+  grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+  align-items: center;
+  gap: clamp(32px, 5vw, 80px);
+}
+
+.shelf__list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.shelf__item {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  grid-template-areas:
+    'name kind'
+    'desc desc';
+  gap: 6px 16px;
+  padding: 18px 0 18px 22px;
+  border-bottom: 1px solid rgba(244, 217, 160, 0.12);
+}
+
+.shelf__item::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 18px;
+  bottom: 18px;
+  width: 2px;
+  background: linear-gradient(180deg, var(--amber-soft), var(--amber));
+  transform: scaleY(0);
+  transform-origin: top;
+  transition: transform 0.5s var(--ease-out);
+}
+
+.shelf__item.is-active::before {
+  transform: scaleY(1);
+}
+
+.shelf__name {
+  grid-area: name;
+  font-family: var(--display);
+  font-size: clamp(28px, 3vw, 42px);
+  line-height: 1;
+  text-transform: uppercase;
+  color: rgba(244, 217, 160, 0.42);
+  transition:
+    color 0.4s ease,
+    transform 0.5s var(--ease-out);
+}
+
+.shelf__name a {
+  color: inherit;
+}
+
+.shelf__name a:hover {
+  color: var(--amber);
+}
+
+.shelf__name a > span[aria-hidden='true'] {
+  font-family: var(--mono);
+  font-size: 0.45em;
+  vertical-align: 0.6em;
+}
+
+.shelf__item.is-active .shelf__name {
+  color: var(--champagne);
+  transform: translateX(6px);
+}
+
+.shelf__kind {
+  grid-area: kind;
+  align-self: center;
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgba(244, 217, 160, 0.6);
+}
+
+.shelf__desc {
+  grid-area: desc;
+  font-size: 12px;
+  color: rgba(244, 217, 160, 0.75);
+}
+
+.shelf__more {
+  padding: 20px 0 0 22px;
+  font-size: 12px;
+  color: rgba(244, 217, 160, 0.85);
+}
+
+.shelf__stack {
+  min-width: 0;
+}
+
+.swap-card .work-window {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  border: 0;
+  box-shadow: none;
+  background: transparent;
+}
+
+.swap-card .shot {
+  flex: 1;
+  aspect-ratio: auto;
+}
+
+/* The front card shows true colours; cards behind keep the warm wash. */
+.card-swap-slot[data-front] .shot img {
+  filter: none;
+}
+
+/* ── Motion ────────────────────────────────────────────────────────────── */
+
+@keyframes pulse {
+  from {
+    box-shadow: 0 0 0 0 rgba(200, 121, 44, 0.65);
+  }
+  to {
+    box-shadow: 0 0 0 9px rgba(200, 121, 44, 0);
+  }
+}
+
+@keyframes indeterminate {
+  from {
+    transform: translateX(-100%);
+  }
+  to {
+    transform: translateX(270%);
+  }
+}
+
+/* Cards rise into place as they scroll in (scroll-driven, Chromium/Safari 26+;
+   other browsers just show them). */
+@media (prefers-reduced-motion: no-preference) {
+  @supports (animation-timeline: view()) {
+    .reveal {
+      animation: fadeUp linear both;
+      animation-timeline: view();
+      animation-range: entry 0% entry 60%;
+    }
+  }
+}
+
+/* ── Responsive ────────────────────────────────────────────────────────── */
+
+@media (max-width: 900px) {
+  .work__grid,
+  .project.project--featured,
+  .project.project--reverse,
+  .shelf__body {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .project--reverse .frame {
+    order: 0;
+  }
+
+  .project--featured .project__info {
+    padding: 4px 0 12px;
+  }
+
+  .shelf__stack {
+    order: -1;
+  }
+}
+
+@media (max-width: 767px) {
+  .work {
+    padding: 72px 20px 88px;
+  }
+
+  .work__meta {
+    font-size: 11px;
+  }
+
+  .work__title {
+    font-size: clamp(56px, 20vw, 120px);
+  }
+
+  .work__title-outline {
+    -webkit-text-stroke-width: 1.2px;
+  }
+
+  .work__grid {
+    gap: 20px;
+  }
+
+  .badge {
+    margin-left: 0;
+  }
+
+  .shelf__item {
+    padding-left: 18px;
+  }
+}
