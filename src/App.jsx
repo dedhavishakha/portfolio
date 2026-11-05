@@ -1,13 +1,11 @@
-import Nav from './components/Nav.jsx'
-import Hero from './components/Hero.jsx'
+import Landing from './components/Landing.jsx'
 import Work from './components/Work.jsx'
 
 export default function App() {
   return (
     <>
-      <Nav />
+      <Landing />
       <main>
-        <Hero />
         <Work />
       </main>
     </>

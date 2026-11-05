@@ -1,51 +1,34 @@
-import Status from './Status.jsx'
-import Terminal from './Terminal.jsx'
-import Marquee from './Marquee.jsx'
-import { ctas, profile, skills } from '../content.js'
+import { hero, profile } from '../content.js'
 import './Hero.css'
 
 export default function Hero() {
   return (
-    <section className="hero" id="top" aria-label="Intro">
-      <div className="hero__rays" aria-hidden="true" />
+    <section className="hero" aria-label="Intro">
       <div className="hero__vignette" aria-hidden="true" />
-      <div className="hero__glow" aria-hidden="true" />
 
       <div className="hero__main">
-        <p className="hero__meta">
-          <span className="accent">//</span> portfolio — {profile.year}
-        </p>
-        <p className="hero__role">
-          {profile.role} <span className="accent">/</span> {profile.location}
-        </p>
-        <Status className="status--meta" />
+        <h1 className="hero__name">
+          <span>{profile.firstName}</span> <span>{profile.lastName}</span>
+        </h1>
 
-        {/* The outlined surname sits beside the terminal on desktop, so it lives
-            outside the h1; screen readers get the full name from the hidden span. */}
-        <div className="hero__names">
-          <h1 className="hero__name">
-            <span className="hero__first">{profile.firstName}</span>
-            <span className="sr-only"> {profile.lastName}</span>
-          </h1>
-          <div className="hero__last" aria-hidden="true">
-            {profile.lastName}
-          </div>
-        </div>
+        <p className="hero__tagline">
+          {hero.tagline[0]}
+          <br />
+          {hero.tagline[1]}
+        </p>
 
-        <div className="hero__console">
-          <Terminal />
-          <div className="hero__cta">
-            {ctas.map(({ label, href, primary }) => (
-              <a key={href} href={href} className={primary ? 'btn btn--primary' : 'btn btn--ghost'}>
-                {label}
-                {primary && <span aria-hidden="true">→</span>}
-              </a>
-            ))}
-          </div>
-        </div>
+        <ul className="hero__services">
+          {hero.services.map((service) => (
+            <li key={service}>{service}</li>
+          ))}
+        </ul>
+
+        <p className="hero__accent">{hero.accent}</p>
+
+        <a className="btn btn--primary hero__cta" href={hero.cta.href}>
+          {hero.cta.label} <span aria-hidden="true">↗</span>
+        </a>
       </div>
-
-      <Marquee items={skills} />
     </section>
   )
 }

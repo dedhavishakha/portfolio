@@ -1,0 +1,191 @@
+/* ── Landing: intro sheet over a sticky hero ───────────────────────────── */
+
+.landing {
+  position: relative;
+}
+
+/* The hero holds still while the intro lifts away over the spacer's scroll.
+   Its background photo is light grey in every palette, so the nav and hero use
+   dark text here; buttons and accents keep the palette's accent colour. */
+.landing__stage {
+  position: sticky;
+  top: 0;
+  color-scheme: light;
+  --text: #161616;
+  --text-soft: rgba(22, 22, 22, 0.8);
+  --text-muted: rgba(22, 22, 22, 0.6);
+  --line-faint: rgba(22, 22, 22, 0.12);
+  --line: rgba(22, 22, 22, 0.18);
+  --line-strong: rgba(22, 22, 22, 0.28);
+  --bg-5: #f2f2f2;
+  --shadow: #000;
+  --vignette: 8%;
+  color: var(--text);
+}
+
+.landing__spacer {
+  height: 100vh;
+  height: 100svh;
+}
+
+.landing__anchor {
+  position: absolute;
+  top: 100vh;
+  top: 100svh;
+}
+
+/* Hero entrance animations wait until the sheet starts lifting. */
+.landing[data-intro='pending'] .landing__stage * {
+  animation-play-state: paused;
+}
+
+/* Once lifted, the intro and its scroll distance are gone for this visit. */
+.landing[data-intro='done'] .intro,
+.landing[data-intro='done'] .landing__spacer {
+  display: none;
+}
+
+.landing[data-intro='done'] .landing__anchor {
+  top: 0;
+}
+
+/* ── Intro: white sheet with the underlined name ───────────────────────── */
+
+.intro {
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  overflow: hidden;
+  /* the uncovered part of the site stays clickable while the sheet lifts */
+  pointer-events: none;
+}
+
+/* Wider than the screen, so the curved edge meets the sides at an angle
+   instead of turning straight down. */
+.intro__sheet {
+  /* 0 → 1 as the sheet lifts; the curve's depth is capped by width so tall
+     phone screens get the same gentle arc as desktop */
+  --arc: 0;
+  --arc-depth: calc(var(--arc) * min(50vh, 42vw));
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: -15%;
+  right: -15%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #fff;
+  border-radius: 0 0 50% 50% / 0 0 var(--arc-depth) var(--arc-depth);
+  box-shadow: 0 18px 50px rgba(0, 0, 0, 0.12);
+  pointer-events: auto;
+  will-change: transform;
+}
+
+.intro__name {
+  position: relative;
+  margin: 0;
+  font-family: var(--font);
+  font-size: clamp(40px, 6.2vw, 104px);
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: var(--display-tracking);
+  text-transform: uppercase;
+  white-space: nowrap;
+  color: #000;
+}
+
+.intro__name span {
+  display: block;
+  animation: introName 0.9s var(--ease-out) 0.1s both;
+}
+
+/* the underline, drawn left → right on load */
+.intro__name::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0.98em;
+  height: max(2px, 0.05em);
+  background: #000;
+  transform-origin: left;
+  animation: introLine 0.8s var(--ease-out) 0.35s both;
+}
+
+/* margin, not transform, centres it: the fade-in animation owns transform */
+.intro__cue {
+  position: absolute;
+  left: 50%;
+  bottom: clamp(24px, 6vh, 56px);
+  display: grid;
+  place-items: center;
+  width: 52px;
+  height: 52px;
+  margin-left: -26px;
+  border: 1.5px solid #000;
+  border-radius: 50%;
+  color: #000;
+  animation: introName 0.9s var(--ease-out) 0.9s both;
+  transition:
+    background 0.25s ease,
+    color 0.25s ease;
+}
+
+.intro__cue:hover {
+  background: #000;
+  color: #fff;
+}
+
+.intro__cue svg {
+  width: 20px;
+  height: 20px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.6;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  animation: cueBob 0.8s ease-in-out 1.8s infinite alternate;
+}
+
+@keyframes cueBob {
+  to {
+    transform: translateY(4px);
+  }
+}
+
+@keyframes introName {
+  from {
+    opacity: 0;
+    transform: translateY(0.25em);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes introLine {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: none;
+  }
+}
+
+@media (max-width: 600px) {
+  .intro__name {
+    font-size: 9vw;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .landing__spacer {
+    display: none;
+  }
+
+  .landing__anchor {
+    top: 0;
+  }
+}

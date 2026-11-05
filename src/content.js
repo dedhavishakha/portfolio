@@ -11,11 +11,20 @@ export const profile = {
   status: 'open to work',
 }
 
-export const navLinks = [
-  { label: 'work', href: '#work' },
-  { label: 'about', href: '#about' },
-  { label: 'contact', href: '#contact' },
-]
+export const hero = {
+  tagline: ['shopify developer —', 'themes, apps & storefronts'],
+  services: ['Shopify Themes', 'Shopify Apps', 'Storefronts'],
+  accent: 'based in india',
+  cta: { label: 'View my work', href: '#work' },
+}
+
+// Contact icons in the nav.
+export const contact = {
+  email: 'vishakhaaryavrat@gmail.com',
+  linkedin: 'https://www.linkedin.com/in/vishakha-dedha-a14b09290/',
+  // wa.me needs the number with the country code and no + or spaces
+  whatsapp: 'https://wa.me/916396921240',
+}
 
 export const terminal = {
   title: '~/vishakha — zsh',
@@ -35,9 +44,7 @@ export const ctas = [
 // Work section. Projects without an `href` render without a link; projects
 // without an `image` show their `screen` lines in a terminal-style frame.
 export const work = {
-  areas: 'apps · saas · cms · tracking · storefronts',
-  intro:
-    'Shopify apps, SaaS products, clinic software, analytics and storefronts — most of it live, one still on the workbench.',
+  kicker: ['Apps, stores', '& software I’ve', 'built and shipped'],
   projects: [
     {
       id: 'noodle',
@@ -108,14 +115,13 @@ export const work = {
       kind: 'custom dental cms',
       status: 'private',
       statusLabel: 'private · client',
-      host: 'admin.rancodental.in',
-      description: 'A dental CMS built for Ranco Dental clinic, powering the clinic’s admin panel.',
+      host: 'admin.rancodental.com',
+      // patient names and phone numbers are blurred in this screenshot — keep it that way
+      image: '/work/ranco.webp',
+      imageAlt: 'Ranco Dental admin panel: patient list and clinic stats, with patient details blurred',
+      description:
+        'A dental CMS built for Ranco Dental clinic: patient records with search and date filters, treatment tracking, and a list of patients due for a follow-up call.',
       tags: ['cms', 'admin panel', 'healthcare'],
-      screen: [
-        ['$', 'open admin.rancodental.in'],
-        ['→', 'dental cms — ranco dental clinic'],
-        ['→', 'private admin panel'],
-      ],
     },
     {
       id: 'niit',
@@ -137,21 +143,24 @@ export const work = {
       reverse: true,
     },
   ],
-  shopify: {
-    label: 'shopify themes & storefronts',
+  // Shown as a row, like the projects above (numbering continues after them).
+  themes: [
+    {
+      id: 'flaire',
+      name: 'Flaire',
+      kind: 'shopify theme',
+      statusLabel: 'built in liquid',
+      description: 'A Shopify theme built in Liquid.',
+      screen: [
+        ['$', 'shopify theme push --theme flaire'],
+        ['→', 'custom shopify theme'],
+        ['→', 'built with liquid'],
+      ],
+    },
+  ],
+  // Shown as a grid of store cards.
+  stores: {
     items: [
-      {
-        id: 'flaire',
-        name: 'Flaire',
-        kind: 'shopify theme',
-        host: 'flaire — shopify theme',
-        description: 'A Shopify theme built in Liquid.',
-        screen: [
-          ['$', 'shopify theme push --theme flaire'],
-          ['→', 'custom shopify theme'],
-          ['→', 'built with liquid'],
-        ],
-      },
       {
         id: 'austinbazaar',
         name: 'Austin Bazaar',
@@ -186,11 +195,23 @@ export const work = {
         id: 'dalchinii',
         name: 'Dalchinii',
         kind: 'shopify store',
-        host: 'dalchinii.in',
-        description: 'Shopify storefront.',
+        href: 'https://www.dalchinii.com',
+        host: 'dalchinii.com',
+        image: '/work/dalchinii.webp',
+        imageAlt: 'Dalchinii storefront',
+        description: 'Clothing where Indian craft meets modern form, made with no waste.',
+      },
+      {
+        id: 'barrox',
+        name: 'Barrox Shoes',
+        kind: 'shopify store',
+        href: 'https://barroxshoes.com',
+        host: 'barroxshoes.com',
+        image: '/work/barrox.webp',
+        imageAlt: 'Barrox Shoes storefront',
+        description: 'Street-style sneakers in suede, PU leather and tech mesh.',
       },
     ],
-    more: 'and many more shopify storefronts — ask for the full list',
   },
 }
 

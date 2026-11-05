@@ -1,0 +1,320 @@
+/* Colour palettes. Every block defines the same tokens and every colour on the
+   site is derived from them, so a new palette is one block here plus a line in
+   palettes.js. The live site uses the palette named on <html data-palette>.
+
+   Roles follow the 60-30-10 rule:
+     60  dominant  — the calmest colour; page backgrounds (--bg-*)
+     30  secondary — name gradient, glows, panels, spotlight (--name-*, --glow-2, --haze)
+     10  accent    — the boldest colour; buttons, dots, small highlights only
+   Palettes with two light colours become light themes (dark text on a light
+   page); the rest stay dark. Saturated colours never take the 60% share.
+
+   Tokens:
+     --bg-1 … --bg-4  hero gradient, highlight → base     --bg-5  page base
+     --text           body text (dark on light themes)    --highlight  inset sheen
+     --name-1 … -4    name gradient, top → bottom         --accent / --on-accent
+     --accent-soft    accent as small text on the page    --glow / --glow-2 / --haze
+     --shadow         tint for shadows                    --vignette  hero edge darkening */
+
+/* ── In use: monochrome — matches the white intro and the grey wave hero ──
+   The named palettes below are kept for later but not applied: nothing sets
+   data-palette and the dev switcher isn't rendered (see palettes.js). */
+:root {
+  color-scheme: light;
+  --bg-1: #ffffff;
+  --bg-2: #f7f7f7;
+  --bg-3: #efefef;
+  --bg-4: #e8e8e8;
+  --bg-5: #f2f2f2;
+
+  --text: #161616;
+  --highlight: #ffffff;
+  --name-1: #000000;
+  --name-2: #161616;
+  --name-3: #3a3a3a;
+  --name-4: #5c5c5c;
+
+  --accent: #111111;
+  --on-accent: #ffffff;
+  --accent-soft: #555555;
+
+  --glow: #ffffff;
+  --glow-2: #bdbdbd;
+  --haze: #cfcfcf;
+  --shadow: #000000;
+  --vignette: 8%;
+}
+
+/* ── Light · Platinum Silver 60 · Pale Lavender 30 · Mocha Brown 10 ─────── */
+:root[data-palette='lavender'] {
+  color-scheme: light;
+  --bg-1: #f8f7f5;
+  --bg-2: #efeeec;
+  --bg-3: #e5e4e2; /* Platinum Silver */
+  --bg-4: #e6e0f0; /* Pale Lavender */
+  --bg-5: #e5e4e2;
+
+  --text: #3b2a1d; /* deep shade of Mocha Brown */
+  --highlight: #ffffff;
+  --name-1: #2e2016;
+  --name-2: #4a3526;
+  --name-3: #6f4e37; /* Mocha Brown */
+  --name-4: #8a6a52;
+
+  --accent: #6f4e37; /* Mocha Brown */
+  --on-accent: #f8f7f5;
+  --accent-soft: #6f4e37;
+
+  --glow: #ffffff;
+  --glow-2: #c9bee6; /* deeper Pale Lavender */
+  --haze: #d9d0ee;
+  --shadow: #4a3526;
+  --vignette: 10%;
+}
+
+/* ── Dark · Deep Eggplant Violet 60 · Pastel Orchid Pink 30 · Signal Orange 10 */
+:root[data-palette='orchid'] {
+  color-scheme: dark;
+  --bg-1: #5e1a69;
+  --bg-2: #4f1259;
+  --bg-3: #400849; /* Deep Eggplant Violet */
+  --bg-4: #2e0535;
+  --bg-5: #1f0324;
+
+  --text: #e7b0de; /* Pastel Orchid Pink */
+  --highlight: #fbe7f7;
+  --name-1: #fbe7f7;
+  --name-2: #f0cbea;
+  --name-3: #e7b0de;
+  --name-4: #c98abf;
+
+  --accent: #ff5a0a; /* Signal Orange */
+  --on-accent: #1f0324;
+  --accent-soft: #ff8a4c;
+
+  --glow: #f6d4ef;
+  --glow-2: #e7b0de;
+  --haze: #b05aa6;
+  --shadow: #0e0110;
+  --vignette: 55%;
+}
+
+/* ── Light · Mocha Cream 60 · Cosmic Latte 30 · Deep Burgundy 10 ──────────── */
+:root[data-palette='burgundy'] {
+  color-scheme: light;
+  --bg-1: #f6eee2;
+  --bg-2: #f0e5d4;
+  --bg-3: #ebdcc6; /* Mocha Cream */
+  --bg-4: #d8cbbb; /* toward Cosmic Latte */
+  --bg-5: #ebdcc6;
+
+  --text: #3e161b; /* deep shade of Deep Burgundy */
+  --highlight: #ffffff;
+  --name-1: #4a1a20;
+  --name-2: #5e222a;
+  --name-3: #722f37; /* Deep Burgundy */
+  --name-4: #8e4a50;
+
+  --accent: #722f37; /* Deep Burgundy */
+  --on-accent: #f6eee2;
+  --accent-soft: #722f37;
+
+  --glow: #ffffff;
+  --glow-2: #b7a89a; /* Cosmic Latte */
+  --haze: #b7a89a;
+  --shadow: #4a1b21;
+  --vignette: 10%;
+}
+
+/* ── Sage Green 60 · Concrete Grey 30 · Burnt Amber 10 ──────────────────────
+   Sage and burnt amber sit close to opposite on the colour wheel, so the
+   amber pops against the green. Text is a deep sage shade for contrast. */
+:root[data-palette='sage'] {
+  color-scheme: light;
+  --bg-1: #b9c7aa;
+  --bg-2: #aabb98;
+  --bg-3: #9caf88; /* Sage Green */
+  --bg-4: #a7a7a7; /* Concrete Grey */
+  --bg-5: #9caf88;
+
+  --text: #161c12;
+  --highlight: #ffffff;
+  --name-1: #161c12;
+  --name-2: #26301f;
+  --name-3: #3a4730;
+  --name-4: #4f5f42;
+
+  --accent: #cc5500; /* Burnt Amber */
+  --on-accent: #ffffff;
+  --accent-soft: #6b2800; /* burnt amber deep enough to read on sage */
+
+  --glow: #f2f5ec;
+  --glow-2: #c9d6bc;
+  --haze: #b8c7a8;
+  --shadow: #2a3322;
+  --vignette: 14%;
+}
+
+/* ── Dark · Obsidian Black 60 · Chrome Silver 30 · Laser Crimson Red 10 ───── */
+:root[data-palette='obsidian'] {
+  color-scheme: dark;
+  --bg-1: #2a2929;
+  --bg-2: #1d1c1c;
+  --bg-3: #141313;
+  --bg-4: #0d0d0d;
+  --bg-5: #080808; /* Obsidian Black */
+
+  --text: #cdcbca; /* Chrome Silver */
+  --highlight: #f4f3f2;
+  --name-1: #ffffff;
+  --name-2: #e4e2e1;
+  --name-3: #cdcbca;
+  --name-4: #9c9a99;
+
+  --accent: #d41514; /* Laser Crimson Red */
+  --on-accent: #ffffff;
+  --accent-soft: #f0504e;
+
+  --glow: #f2f0ef;
+  --glow-2: #cdcbca;
+  --haze: #6e6c6b;
+  --shadow: #000000;
+  --vignette: 60%;
+}
+
+/* ── Dark · Deep Obsidian Black 60 · Electric Cobalt Blue 30 · Vibrant Crimson 10
+   Cobalt is too intense to be the background, so it lights the page instead. */
+:root[data-palette='cobalt'] {
+  color-scheme: dark;
+  --bg-1: #101466;
+  --bg-2: #0a0c40;
+  --bg-3: #05061f;
+  --bg-4: #02020f;
+  --bg-5: #01000c; /* Deep Obsidian Black */
+
+  --text: #e8e9ff;
+  --highlight: #ffffff;
+  --name-1: #ffffff;
+  --name-2: #dcddff;
+  --name-3: #a9abff;
+  --name-4: #5558f0;
+
+  --accent: #bf032f; /* Vibrant Crimson Red */
+  --on-accent: #ffffff;
+  --accent-soft: #ff6b8a;
+
+  --glow: #c9cbff;
+  --glow-2: #0002cc; /* Electric Cobalt Blue */
+  --haze: #0002cc;
+  --shadow: #000000;
+  --vignette: 55%;
+}
+
+/* ── Dark · Midnight Charcoal 60 · Cool Steel Grey 30 · Vibrant Coral Orange 10 */
+:root[data-palette='steel'] {
+  color-scheme: dark;
+  --bg-1: #343a42;
+  --bg-2: #262a30;
+  --bg-3: #17191c; /* Midnight Charcoal */
+  --bg-4: #111316;
+  --bg-5: #0c0d0f;
+
+  --text: #d3d9df; /* light tint of Cool Steel Grey */
+  --highlight: #f4f6f8;
+  --name-1: #f4f6f8;
+  --name-2: #d3d9df;
+  --name-3: #b0bac4;
+  --name-4: #929da7; /* Cool Steel Grey */
+
+  --accent: #ff4b32; /* Vibrant Coral Orange */
+  --on-accent: #0c0d0f;
+  --accent-soft: #ff7a66;
+
+  --glow: #e6ebf0;
+  --glow-2: #929da7;
+  --haze: #5f6b76;
+  --shadow: #000000;
+  --vignette: 55%;
+}
+
+/* ── Dark · Midnight Black 60 · Electric Cobalt Blue 30 · Acid Lime 10 ─────── */
+:root[data-palette='lime'] {
+  color-scheme: dark;
+  --bg-1: #0f2350;
+  --bg-2: #0a1736;
+  --bg-3: #060d1e;
+  --bg-4: #04070f;
+  --bg-5: #030407; /* Midnight Black */
+
+  --text: #e6ecf5;
+  --highlight: #ffffff;
+  --name-1: #ffffff;
+  --name-2: #dce6f7;
+  --name-3: #8fb0e8;
+  --name-4: #1558c9; /* Electric Cobalt Blue */
+
+  --accent: #d4ff24; /* Acid Lime */
+  --on-accent: #030407;
+  --accent-soft: #d4ff24;
+
+  --glow: #cfe0ff;
+  --glow-2: #1558c9;
+  --haze: #1558c9;
+  --shadow: #000000;
+  --vignette: 55%;
+}
+
+/* ── Light · Warm Cream Beige 60 · Muted Sage Grey 30 · Deep Burgundy 10 ─────
+   Burgundy and sage are muted complements (red/green), so they balance. */
+:root[data-palette='wine'] {
+  color-scheme: light;
+  --bg-1: #f7eee2;
+  --bg-2: #f0e2cf;
+  --bg-3: #e8d2b5; /* Warm Cream Beige */
+  --bg-4: #d3ccba; /* toward Muted Sage Grey */
+  --bg-5: #e8d2b5;
+
+  --text: #2e0504; /* deep shade of Deep Burgundy */
+  --highlight: #ffffff;
+  --name-1: #3a0605;
+  --name-2: #590907; /* Deep Burgundy */
+  --name-3: #7a1a17;
+  --name-4: #8f2e2a;
+
+  --accent: #590907; /* Deep Burgundy */
+  --on-accent: #f7eee2;
+  --accent-soft: #590907;
+
+  --glow: #ffffff;
+  --glow-2: #a5a79b; /* Muted Sage Grey */
+  --haze: #a5a79b;
+  --shadow: #3a0605;
+  --vignette: 10%;
+}
+
+/* ── Dark · Mocha Brown · Champagne Gold · Burnt Amber — the original v3 ──── */
+:root[data-palette='champagne'] {
+  color-scheme: dark;
+  --bg-1: #8c6d4f;
+  --bg-2: #725842;
+  --bg-3: #5b4632;
+  --bg-4: #3a2c1f;
+  --bg-5: #2a1f16;
+
+  --text: #f4d9a0;
+  --highlight: #fff0d2;
+  --name-1: #fff0d2;
+  --name-2: #f4d9a0;
+  --name-3: #e2ac68;
+  --name-4: #c8792c;
+
+  --accent: #c8792c;
+  --on-accent: #1e160f;
+  --accent-soft: #f2b771;
+
+  --glow: #ffe4af;
+  --glow-2: #e8aa5f;
+  --haze: #c8792c;
+  --shadow: #1e160f;
+  --vignette: 55%;
+}
