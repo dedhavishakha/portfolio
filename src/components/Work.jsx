@@ -1,3 +1,4 @@
+import { useEffect, useRef } from 'react'
 import SplitText from './reactbits/SplitText.jsx'
 import DecryptedText from './reactbits/DecryptedText.jsx'
 import { profile, work } from '../content.js'
@@ -75,10 +76,12 @@ function ExternalLink({ href, name, children, className }) {
 // with an outline frame offset behind the media and the project number above.
 function ProjectRow({ project, index, heading: Heading = 'h3' }) {
   const { name, subtitle, kind, statusLabel, description, href, linkLabel } = project
+  const flip = index % 2 === 1
 
+  // each side slides in from its own side (see useSlideIn)
   return (
-    <li className={index % 2 ? 'row row--flip reveal' : 'row reveal'}>
-      <div className="row__text">
+    <li className={flip ? 'row row--flip' : 'row'}>
+      <div className="row__text" data-reveal={flip ? 'right' : 'left'}>
         <p className="row__kind">
           <DecryptedText
             text={kind}
@@ -92,10 +95,7 @@ function ProjectRow({ project, index, heading: Heading = 'h3' }) {
           {statusLabel && <> · {statusLabel}</>}
         </p>
 
-        <Heading className="row__title">
-          {name}
-          <span className="row__rule" aria-hidden="true" />
-        </Heading>
+        <Heading className="row__title">{name}</Heading>
 
         <p className="row__desc">{description}</p>
 
@@ -106,7 +106,7 @@ function ProjectRow({ project, index, heading: Heading = 'h3' }) {
         )}
       </div>
 
-      <div className="row__media">
+      <div className="row__media" data-reveal={flip ? 'left' : 'right'}>
         <span className="row__num" aria-hidden="true">
           {pad(index + 1)}
         </span>
@@ -119,17 +119,14 @@ function ProjectRow({ project, index, heading: Heading = 'h3' }) {
   )
 }
 
-function StoreCard({ store }) {
+function StoreCard({ store, index }) {
   return (
-    <li className="store reveal">
+    <li className="store" data-reveal={index % 2 ? 'right' : 'left'}>
       <MediaLink item={store}>
         <Shot item={store} />
       </MediaLink>
       <div className="store__text">
-        <h4 className="store__name">
-          {store.name}
-          <span className="row__rule" aria-hidden="true" />
-        </h4>
+        <h4 className="store__name">{store.name}</h4>
         <p className="store__desc">{store.description}</p>
         {store.href ? (
           <ExternalLink className="row__link" href={store.href} name={store.name}>
@@ -146,17 +143,43 @@ function StoreCard({ store }) {
 // A smaller version of the section title: first word dark, second grey.
 function PartHeading({ id, words: [first, second] }) {
   return (
-    <h3 className="part__title reveal" id={id}>
+    <h3 className="part__title" id={id} data-reveal="up">
       <span>{first}</span> <span>{second}</span>
     </h3>
   )
 }
 
+// Marks each [data-reveal] element with .is-in the first time it scrolls into
+// view; the CSS slides it in from its side (or fades it up).
+function useSlideIn(ref) {
+  useEffect(() => {
+    const targets = ref.current.querySelectorAll('[data-reveal]')
+    if (!('IntersectionObserver' in window)) {
+      targets.forEach((el) => el.classList.add('is-in'))
+      return
+    }
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return
+          entry.target.classList.add('is-in')
+          observer.unobserve(entry.target)
+        })
+      },
+      { rootMargin: '0px 0px -12% 0px' },
+    )
+    targets.forEach((el) => observer.observe(el))
+    return () => observer.disconnect()
+  }, [ref])
+}
+
 export default function Work() {
   const { projects, themes, stores } = work
+  const sectionRef = useRef(null)
+  useSlideIn(sectionRef)
 
   return (
-    <section className="work" id="work" aria-labelledby="work-title">
+    <section className="work" id="work" aria-labelledby="work-title" ref={sectionRef}>
       <div className="work__glow" aria-hidden="true" />
 
       <header className="work__head">
@@ -195,8 +218,8 @@ export default function Work() {
       <section className="work__part" aria-labelledby="stores-title">
         <PartHeading id="stores-title" words={['Shopify', 'websites']} />
         <ul className="stores">
-          {stores.items.map((store) => (
-            <StoreCard key={store.id} store={store} />
+          {stores.items.map((store, i) => (
+            <StoreCard key={store.id} store={store} index={i} />
           ))}
         </ul>
       </section>
