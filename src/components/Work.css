@@ -352,17 +352,15 @@ a.frame:hover .shot img {
   box-shadow: 0 30px 60px -30px color-mix(in srgb, var(--shadow) 45%, transparent);
 }
 
+/* brand name on the left, "Visit now" on the right */
 .store__text {
   display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 12px;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 16px;
 }
 
 .store__name {
-  display: flex;
-  align-items: center;
-  gap: 20px;
   margin: 0;
   font-size: clamp(18px, 1.6vw, 24px);
   font-weight: 500;
@@ -371,18 +369,8 @@ a.frame:hover .shot img {
   text-transform: uppercase;
 }
 
-.store__desc {
-  margin: 0;
-  font-size: 14px;
-  line-height: 1.7;
-  color: var(--text-soft);
-}
-
-.store__host {
-  font-size: 12px;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: var(--text-muted);
+.store__text .row__link {
+  flex: none;
 }
 
 

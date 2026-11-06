@@ -127,13 +127,10 @@ function StoreCard({ store, index }) {
       </MediaLink>
       <div className="store__text">
         <h4 className="store__name">{store.name}</h4>
-        <p className="store__desc">{store.description}</p>
-        {store.href ? (
+        {store.href && (
           <ExternalLink className="row__link" href={store.href} name={store.name}>
-            {store.host}
+            Visit now
           </ExternalLink>
-        ) : (
-          <span className="store__host">{store.host}</span>
         )}
       </div>
     </li>

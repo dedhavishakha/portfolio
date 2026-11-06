@@ -60,7 +60,7 @@ export const work = {
       description:
         'Lets shoppers negotiate prices in a live chat widget. Merchants cap the discount, scope rules to products or collections, and every accepted offer becomes a draft order.',
       tags: ['ai negotiation', 'live chat widget', 'discount rules', 'draft orders'],
-      linkLabel: './view-on-app-store',
+      linkLabel: 'View on App Store',
       featured: true,
     },
     {
@@ -76,7 +76,7 @@ export const work = {
       description:
         'Website for ScopeGen, a consulting and performance-marketing company that builds growth systems through data, automation and creative.',
       tags: ['marketing site', 'services', 'portfolio'],
-      linkLabel: './visit',
+      linkLabel: 'Visit now',
     },
     {
       id: 'appsy',
@@ -107,7 +107,7 @@ export const work = {
       description:
         'A CMS for walk-in dental clinics: patients, consultations, prescriptions, treatments, bills, X-rays and WhatsApp reminders in one place, set up in two minutes.',
       tags: ['saas', 'clinic management', 'whatsapp reminders'],
-      linkLabel: './visit',
+      linkLabel: 'Visit now',
     },
     {
       id: 'ranco',
@@ -138,7 +138,7 @@ export const work = {
       description:
         'Event tracking for niit.ai — NIIT’s tech and GenAI courses platform — set up in Google Tag Manager.',
       tags: ['google tag manager', 'event tracking', 'analytics'],
-      linkLabel: './visit',
+      linkLabel: 'Visit now',
       featured: true,
       reverse: true,
     },
@@ -169,7 +169,6 @@ export const work = {
         host: 'austinbazaar.com',
         image: '/work/austinbazaar.webp',
         imageAlt: 'Austin Bazaar storefront',
-        description: 'Musical instruments and pro audio for the US.',
       },
       {
         id: 'seeaash',
@@ -179,7 +178,6 @@ export const work = {
         host: 'seeaash.in',
         image: '/work/seeaash.webp',
         imageAlt: 'Seeaash storefront',
-        description: 'Contemporary Indian wear.',
       },
       {
         id: 'ambrosia',
@@ -189,7 +187,6 @@ export const work = {
         host: 'ambrosiaindia.in',
         image: '/work/ambrosia.webp',
         imageAlt: 'Ambrosia India storefront',
-        description: 'Handcrafted clothing for women and men.',
       },
       {
         id: 'dalchinii',
@@ -199,7 +196,6 @@ export const work = {
         host: 'dalchinii.com',
         image: '/work/dalchinii.webp',
         imageAlt: 'Dalchinii storefront',
-        description: 'Clothing where Indian craft meets modern form, made with no waste.',
       },
       {
         id: 'barrox',
@@ -209,7 +205,6 @@ export const work = {
         host: 'barroxshoes.com',
         image: '/work/barrox.webp',
         imageAlt: 'Barrox Shoes storefront',
-        description: 'Street-style sneakers in suede, PU leather and tech mesh.',
       },
     ],
   },
